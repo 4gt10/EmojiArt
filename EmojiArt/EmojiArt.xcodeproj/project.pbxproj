@@ -60,11 +60,9 @@
 			isa = PBXGroup;
 			children = (
 				BEA63AC32B4FF1C000DB85FF /* EmojiArtApp.swift */,
-				BEA63AD12B4FF22900DB85FF /* EmojiArt.swift */,
-				BEA63AD32B4FF37300DB85FF /* EmojiArtDocument.swift */,
-				BEA63AC52B4FF1C000DB85FF /* EmojiArtDocumentView.swift */,
 				BEA63AD52B4FF5C800DB85FF /* Extensions.swift */,
 				BEA63AD72B5002BD00DB85FF /* Sturldata.swift */,
+				BEA63AD92B51504500DB85FF /* EmojiArtDocument */,
 				BEA63AC72B4FF1C100DB85FF /* Assets.xcassets */,
 				BEA63AC92B4FF1C100DB85FF /* Preview Content */,
 			);
@@ -77,6 +75,16 @@
 				BEA63ACA2B4FF1C100DB85FF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BEA63AD92B51504500DB85FF /* EmojiArtDocument */ = {
+			isa = PBXGroup;
+			children = (
+				BEA63AD12B4FF22900DB85FF /* EmojiArt.swift */,
+				BEA63AD32B4FF37300DB85FF /* EmojiArtDocument.swift */,
+				BEA63AC52B4FF1C000DB85FF /* EmojiArtDocumentView.swift */,
+			);
+			path = EmojiArtDocument;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
