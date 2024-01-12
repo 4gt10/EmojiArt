@@ -1,2 +1,2 @@
 # EmojiArt
-App to make artwork of emojis
+Artwork of emojis
