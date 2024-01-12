@@ -10,7 +10,6 @@ import SwiftUI
 struct EmojiArtDocumentView: View {
     typealias Emoji = EmojiArt.Emoji
     
-    private let emojis = "👻🍎😃🤪☹️🤯🐶🐭🦁🐵🦆🐝🐢🐄🐖🌲🌴🌵🍄🌞🌎🔥🌈🌧️🌨️☁️⛄️⛳️🚗🚙🚓🚲🛺🏍️🚘✈️🛩️🚀🚁🏰🏠❤️💤⛵️"
     private let paletteFontSize: CGFloat = 40
     
     @ObservedObject private(set) var viewModel: EmojiArtDocument
@@ -20,7 +19,7 @@ struct EmojiArtDocumentView: View {
     var body: some View {
         VStack(spacing: 0) {
             documentBody
-            ScrollingEmojis(emojis)
+            EmojiPaletteView()
                 .font(.system(size: paletteFontSize))
                 .padding(.horizontal)
         }
@@ -106,25 +105,7 @@ struct EmojiArtDocumentView: View {
     }
 }
 
-struct ScrollingEmojis: View {
-    let emojis: [String]
-    
-    init(_ emojis: String) {
-        self.emojis = emojis.uniqued.map(String.init)
-    }
-    
-    var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(emojis, id: \.self) { emoji in
-                    Text(emoji)
-                        .draggable(emoji)
-                }
-            }
-        }
-    }
-}
-
 #Preview {
     EmojiArtDocumentView(viewModel: .init())
+        .environmentObject(EmojiPaletteStore(named: "Preview"))
 }
