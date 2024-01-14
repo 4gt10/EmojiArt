@@ -27,6 +27,37 @@ struct EmojiArt {
         ))
     }
     
+    mutating func updateEmoji(id: Emoji.ID, size: Int) {
+        guard let index = emojiIndex(with: id) else {
+            return
+        }
+        emojis[index].size = size
+    }
+    
+    mutating func updateEmoji(id: Emoji.ID, position: Emoji.Position) {
+        guard let index = emojiIndex(with: id) else {
+            return
+        }
+        emojis[index].position = position
+    }
+    
+    
+}
+
+// MARK: - Private methods
+
+private extension EmojiArt {
+    func emojiIndex(with id: Emoji.ID) -> Int? {
+        guard let index = emojis.firstIndex(where: { $0.id == id }) else {
+            return nil
+        }
+        return index
+    }
+}
+
+// MARK: - Sub-entities
+
+extension EmojiArt {
     struct Emoji: Identifiable {
         let emoji: String
         var position: Position

@@ -29,6 +29,14 @@ final class EmojiArtDocument: ObservableObject {
     func addEmoji(_ emoji: String, at position: Emoji.Position, of size: Int) {
         model.addEmoji(emoji, at: position, of: size)
     }
+    
+    func updateEmoji(id: Emoji.ID, size: Int) {
+        model.updateEmoji(id: id, size: size)
+    }
+    
+    func updateEmoji(id: Emoji.ID, position: Emoji.Position) {
+        model.updateEmoji(id: id, position: position)
+    }
 }
 
 extension EmojiArt.Emoji.Position {
