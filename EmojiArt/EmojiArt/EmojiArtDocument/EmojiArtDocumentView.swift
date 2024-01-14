@@ -35,7 +35,9 @@ struct EmojiArtDocumentView: View {
                     .offset(pan + panGestureState)
                     .gesture(panGesture.simultaneously(with: zoomGesture))
                     .onTapGesture {
-                        selectedEmojisIds.removeAll()
+                        if !selectedEmojisIds.isEmpty {
+                            selectedEmojisIds.removeAll()
+                        }
                     }
             }
             .dropDestination(for: Sturldata.self) {
@@ -50,12 +52,12 @@ struct EmojiArtDocumentView: View {
             .position(Emoji.Position.zero.in(geometry))
         ForEach(viewModel.emojis) { emoji in
             let isSelected = selectedEmojisIds.contains(emoji.id)
+            let scaleEffect = isSelected ? selectedEmojisZoomGestureState : 1
+            let offset = isSelected ? selectedEmojisPanGestureState : .zero
             Text(emoji.emoji)
                 .font(.system(size: CGFloat(emoji.size)))
-                .border(selectionBorder(for: emoji), width: 2)
-                .scaleEffect(isSelected ? selectedEmojisZoomGestureState : 1)
-                .offset(isSelected ? selectedEmojisPanGestureState : .zero)
-                .position(emoji.position.in(geometry))
+                .scaleEffect(scaleEffect)
+                .offset(offset)
                 .gesture(selectedEmojisPanGesture, including: isSelected ? .gesture : .subviews)
                 .onTapGesture {
                     if let index = selectedEmojisIds.firstIndex(of: emoji.id) {
@@ -64,11 +66,39 @@ struct EmojiArtDocumentView: View {
                         selectedEmojisIds.append(emoji.id)
                     }
                 }
+                .overlay(
+                    selectionView(for: emoji)
+                        .scaleEffect(scaleEffect)
+                        .offset(offset)
+                )
+                .position(emoji.position.in(geometry))
         }
     }
     
-    private func selectionBorder(for emoji: Emoji) -> some ShapeStyle {
-        selectedEmojisIds.contains(emoji.id) ? AnyShapeStyle(SelectionShapeStyle()) : AnyShapeStyle(.clear)
+    @ViewBuilder
+    private func selectionView(for emoji: Emoji) -> some View {
+        let isSelected = selectedEmojisIds.contains(emoji.id)
+        let size = CGFloat(emoji.size)
+        let borderDash: [CGFloat] = [size / 5, size / 10]
+        let borderWidth: CGFloat = size / 20
+        let deleteButtonSize = size / 2
+        if isSelected {
+            GeometryReader { geometry in
+                ZStack {
+                    Rectangle()
+                        .strokeBorder(.selection, style: .init(lineWidth: borderWidth, dash: borderDash))
+                    Image(systemName: "minus.circle.fill")
+                        .foregroundColor(.red)
+                        .font(.system(size: deleteButtonSize))
+                        .offset(x: geometry.size.width / 2, y: -(geometry.size.height / 2))
+                        .onTapGesture {
+                            viewModel.removeEmoji(with: [emoji.id])
+                        }
+                }
+            }
+        } else {
+            EmptyView()
+        }
     }
     
     // MARK: - Document gestures
@@ -111,7 +141,7 @@ struct EmojiArtDocumentView: View {
     private func applyZoomToSelectedEmojis(_ zoom: CGFloat) {
         selectedEmojisIds.forEach { emojiId in
             if let initial = viewModel.emojis.first(where: { $0.id == emojiId })?.size {
-                viewModel.updateEmoji(id: emojiId, size: Int(CGFloat(initial) * zoom))
+                viewModel.updateEmoji(with: emojiId, .size(Int(CGFloat(initial) * zoom)))
             }
         }
     }
@@ -120,8 +150,8 @@ struct EmojiArtDocumentView: View {
         selectedEmojisIds.forEach { emojiId in
             if let initial = viewModel.emojis.first(where: { $0.id == emojiId })?.position {
                 viewModel.updateEmoji(
-                    id: emojiId,
-                    position: .init(x: initial.x + Int(pan.width), y: initial.y - Int(pan.height))
+                    with: emojiId,
+                    .position(.init(x: initial.x + Int(pan.width), y: initial.y - Int(pan.height)))
                 )
             }
         }

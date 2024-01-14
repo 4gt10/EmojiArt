@@ -27,21 +27,25 @@ struct EmojiArt {
         ))
     }
     
-    mutating func updateEmoji(id: Emoji.ID, size: Int) {
+    mutating func updateEmoji(with id: Emoji.ID, _ update: Emoji.Update) {
         guard let index = emojiIndex(with: id) else {
             return
         }
-        emojis[index].size = size
-    }
-    
-    mutating func updateEmoji(id: Emoji.ID, position: Emoji.Position) {
-        guard let index = emojiIndex(with: id) else {
-            return
+        switch update {
+        case .size(let size):
+            emojis[index].size = size
+        case .position(let position):
+            emojis[index].position = position
         }
-        emojis[index].position = position
     }
     
-    
+    mutating func removeEmoji(with ids: [Emoji.ID]) {
+        ids.forEach { 
+            if let index = emojiIndex(with: $0) {
+                emojis.remove(at: index)
+            }
+        }
+    }
 }
 
 // MARK: - Private methods
@@ -69,6 +73,11 @@ extension EmojiArt {
             
             var x: Int
             var y: Int
+        }
+        
+        enum Update {
+            case size(Int)
+            case position(Emoji.Position)
         }
     }
 }

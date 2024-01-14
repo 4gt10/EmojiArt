@@ -30,12 +30,12 @@ final class EmojiArtDocument: ObservableObject {
         model.addEmoji(emoji, at: position, of: size)
     }
     
-    func updateEmoji(id: Emoji.ID, size: Int) {
-        model.updateEmoji(id: id, size: size)
+    func updateEmoji(with id: Emoji.ID, _ update: Emoji.Update) {
+        model.updateEmoji(with: id, update)
     }
     
-    func updateEmoji(id: Emoji.ID, position: Emoji.Position) {
-        model.updateEmoji(id: id, position: position)
+    func removeEmoji(with ids: [Emoji.ID]) {
+        model.removeEmoji(with: ids)
     }
 }
 
