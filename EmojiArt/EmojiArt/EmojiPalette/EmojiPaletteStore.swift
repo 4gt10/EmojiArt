@@ -10,8 +10,8 @@ import SwiftUI
 final class EmojiPaletteStore: ObservableObject {
     let name: String
 
-    @Published private(set) var palettes: [EmojiPalette]
-    @Published private(set) var cursor = 0
+    @Published var palettes: [EmojiPalette]
+    @Published private(set) var cursorIndex = 0
     
     private static var allPalettes: [EmojiPalette] { EmojiPalette.builtins }
     
@@ -31,30 +31,37 @@ final class EmojiPaletteStore: ObservableObject {
             return
         }
         palettes.append(Self.allPalettes[nextCursor])
-        cursor = nextCursor
+        cursorIndex = nextCursor
     }
     
     func removePalette() {
         guard palettes.count > 1 else {
             return
         }
-        palettes.remove(at: cursor)
-        goPreviousPalette()
+        palettes.remove(at: cursorIndex)
+        goToPreviousPalette()
     }
     
-    func goNextPalette() {
-        let nextCursor = cursor + 1
+    func goToNextPalette() {
+        let nextCursor = cursorIndex + 1
         guard nextCursor < palettes.count else {
-            cursor = 0
+            cursorIndex = 0
             return
         }
-        cursor = nextCursor
+        cursorIndex = nextCursor
     }
     
-    func goPreviousPalette() {
-        guard cursor > 0 else {
+    func goToPreviousPalette() {
+        guard cursorIndex > 0 else {
             return
         }
-        cursor -= 1
+        cursorIndex -= 1
+    }
+    
+    func goToPalette(atIndex index: Int) {
+        guard palettes.indices.contains(index) && index != cursorIndex else {
+            return
+        }
+        cursorIndex = index
     }
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 struct EmojiPalette: Identifiable {
-    let name: String
-    let emojis: String
+    var name: String
+    var emojis: String
     let id = UUID()
     
     static let builtins = [
