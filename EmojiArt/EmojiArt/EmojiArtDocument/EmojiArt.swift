@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmojiArt {
+struct EmojiArt: Codable {
     private(set) var background: URL?
     private(set) var emojis = [Emoji]()
     
@@ -62,13 +62,13 @@ private extension EmojiArt {
 // MARK: - Sub-entities
 
 extension EmojiArt {
-    struct Emoji: Identifiable {
+    struct Emoji: Identifiable, Codable {
         let emoji: String
         var position: Position
         var size: Int
         let id: Int
         
-        struct Position {
+        struct Position: Codable {
             static let zero = Self(x: 0, y: 0)
             
             var x: Int

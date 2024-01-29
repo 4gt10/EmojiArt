@@ -10,7 +10,11 @@ import SwiftUI
 final class EmojiArtDocument: ObservableObject {
     typealias Emoji = EmojiArt.Emoji
     
-    @Published private var model: EmojiArt = EmojiArt()
+    @Published private var model: EmojiArt = EmojiArt() {
+        didSet {
+            persist()
+        }
+    }
     
     var background: URL? {
         model.background
@@ -18,6 +22,27 @@ final class EmojiArtDocument: ObservableObject {
     
     var emojis: [Emoji] {
         model.emojis
+    }
+    
+    private static var lastSaveFileUrl: URL? {
+        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return nil
+        }
+        
+        return documentsUrl.appending(path: "last.emojiart")
+    }
+    
+    init() {
+        guard let fileUrl = Self.lastSaveFileUrl else {
+            return
+        }
+        do {
+            let data = try Data(contentsOf: fileUrl)
+            let decoder = JSONDecoder()
+            self.model = try decoder.decode(EmojiArt.self, from: data)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
     // MARK: - Intent(s)
@@ -36,6 +61,22 @@ final class EmojiArtDocument: ObservableObject {
     
     func removeEmoji(with ids: [Emoji.ID]) {
         model.removeEmoji(with: ids)
+    }
+}
+
+private extension EmojiArtDocument {
+    func persist() {
+        do {
+            if let fileUrl = Self.lastSaveFileUrl {
+                let encoder = JSONEncoder()
+                let data = try encoder.encode(model)
+                try data.write(to: fileUrl)
+            } else {
+                throw EmojiArtError.fileNotFound
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 

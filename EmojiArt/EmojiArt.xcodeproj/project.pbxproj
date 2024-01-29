@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE4F3EA32B67C52B001E889E /* EmojiArtError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4F3EA22B67C52B001E889E /* EmojiArtError.swift */; };
 		BEA63AC42B4FF1C000DB85FF /* EmojiArtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA63AC32B4FF1C000DB85FF /* EmojiArtApp.swift */; };
 		BEA63AC62B4FF1C000DB85FF /* EmojiArtDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA63AC52B4FF1C000DB85FF /* EmojiArtDocumentView.swift */; };
 		BEA63AC82B4FF1C100DB85FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA63AC72B4FF1C100DB85FF /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE4F3EA22B67C52B001E889E /* EmojiArtError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtError.swift; sourceTree = "<group>"; };
 		BEA63AC02B4FF1C000DB85FF /* EmojiArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA63AC32B4FF1C000DB85FF /* EmojiArtApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtApp.swift; sourceTree = "<group>"; };
 		BEA63AC52B4FF1C000DB85FF /* EmojiArtDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentView.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				BEA63AD52B4FF5C800DB85FF /* Extensions.swift */,
 				BEA63AD72B5002BD00DB85FF /* Sturldata.swift */,
 				BEA63AE12B5155A300DB85FF /* AnimatedActionButton.swift */,
+				BE4F3EA22B67C52B001E889E /* EmojiArtError.swift */,
 				BEA63AD92B51504500DB85FF /* EmojiArtDocument */,
 				BEA63ADA2B51511A00DB85FF /* EmojiPalette */,
 				BEA63AC72B4FF1C100DB85FF /* Assets.xcassets */,
@@ -195,6 +198,7 @@
 				BEA63AC62B4FF1C000DB85FF /* EmojiArtDocumentView.swift in Sources */,
 				BEBE09EA2B6272FD00FA448A /* EmojiPaletteEditorView.swift in Sources */,
 				BEA63AC42B4FF1C000DB85FF /* EmojiArtApp.swift in Sources */,
+				BE4F3EA32B67C52B001E889E /* EmojiArtError.swift in Sources */,
 				BEA63AD42B4FF37300DB85FF /* EmojiArtDocument.swift in Sources */,
 				BEA63AE02B51551600DB85FF /* EmojiPaletteView.swift in Sources */,
 				BEA63AE22B5155A300DB85FF /* AnimatedActionButton.swift in Sources */,

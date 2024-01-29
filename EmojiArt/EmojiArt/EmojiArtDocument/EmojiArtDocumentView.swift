@@ -39,10 +39,27 @@ struct EmojiArtDocumentView: View {
                             selectedEmojisIds.removeAll()
                         }
                     }
+                emptyView
             }
             .dropDestination(for: Sturldata.self) {
                 drop($0, at: $1, in: geometry)
             }
+        }
+    }
+    
+    @ViewBuilder
+    private var emptyView: some View {
+        if viewModel.background == nil {
+            Text(
+            """
+                1. Drag & drop any image URL
+                2. Long press emojis from the palette to drag & drop
+                3. Select emojis to move, scale or delete
+                4. Click on palette name to show the next one
+                5. Long press palette name to open menu
+            """
+            )
+            .foregroundStyle(.gray)
         }
     }
     
