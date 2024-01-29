@@ -18,7 +18,8 @@ struct EmojiPaletteView: View {
                 .contextMenu {
                     gotoMenu
                     AnimatedActionButton("Add", systemImage: "plus") {
-                        viewModel.addPalette()
+                        viewModel.addEmptyPalette()
+                        isPaletteEditorShown = true
                     }
                     AnimatedActionButton("Edit", systemImage: "pencil") {
                         isPaletteEditorShown = true

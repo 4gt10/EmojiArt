@@ -13,11 +13,9 @@ final class EmojiPaletteStore: ObservableObject {
     @Published var palettes: [EmojiPalette]
     @Published private(set) var cursorIndex = 0
     
-    private static var allPalettes: [EmojiPalette] { EmojiPalette.builtins }
-    
     init(named name: String) {
         self.name = name
-        self.palettes = Array(Self.allPalettes.prefix(upTo: Self.allPalettes.count / 2)) // half of what we got
+        self.palettes = EmojiPalette.builtins
         if palettes.isEmpty {
             palettes.append(.init(name: "Warning", emojis: "⚠️"))
         }
@@ -25,13 +23,11 @@ final class EmojiPaletteStore: ObservableObject {
     
     // MARK: - Intent(s)
     
-    func addPalette() {
-        let nextCursor = palettes.count
-        guard nextCursor < Self.allPalettes.count else {
-            return
+    func addEmptyPalette() {
+        palettes.append(EmojiPalette(name: "", emojis: ""))
+        if let lastIndex = palettes.indices.last {
+            cursorIndex = lastIndex
         }
-        palettes.append(Self.allPalettes[nextCursor])
-        cursorIndex = nextCursor
     }
     
     func removePalette() {
