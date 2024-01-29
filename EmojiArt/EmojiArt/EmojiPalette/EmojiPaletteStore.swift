@@ -10,14 +10,26 @@ import SwiftUI
 final class EmojiPaletteStore: ObservableObject {
     let name: String
 
-    @Published var palettes: [EmojiPalette]
+    var palettes: [EmojiPalette] {
+        get {
+            defaults.getPalettes(forKey: userDefaultsKey)
+        }
+        set {
+            defaults.setPalettes(newValue, forKey: userDefaultsKey)
+            objectWillChange.send()
+        }
+    }
     @Published private(set) var cursorIndex = 0
+    
+    private let defaults = UserDefaults.standard
+    private var userDefaultsKey: String {
+        "Emoji Palette: \(name)"
+    }
     
     init(named name: String) {
         self.name = name
-        self.palettes = EmojiPalette.builtins
         if palettes.isEmpty {
-            palettes.append(.init(name: "Warning", emojis: "⚠️"))
+            palettes = EmojiPalette.builtins
         }
     }
     
@@ -59,5 +71,21 @@ final class EmojiPaletteStore: ObservableObject {
             return
         }
         cursorIndex = index
+    }
+}
+
+extension UserDefaults {
+    func getPalettes(forKey key: String) -> [EmojiPalette] {
+        guard let data = UserDefaults.standard.data(forKey: key) else {
+            return []
+        }
+        let decoder = JSONDecoder()
+        return (try? decoder.decode([EmojiPalette].self, from: data)) ?? []
+    }
+    
+    func setPalettes(_ palettes: [EmojiPalette], forKey key: String) {
+        let encoder = JSONEncoder()
+        let data = try? encoder.encode(palettes)
+        UserDefaults.standard.setValue(data, forKey: key)
     }
 }

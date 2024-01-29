@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct EmojiPalette: Identifiable {
+struct EmojiPalette: Identifiable, Codable {
     var name: String
     var emojis: String
-    let id = UUID()
+    private(set) var id = UUID()
     
     static let builtins = [
         EmojiPalette(name: "Vehicles", emojis: "🚙🚗🚘🚕🚖🏎🚚🛻🚛🚐🚓🚔🚑🚒🚀✈️🛫🛬🛩🚁🛸🚲🏍🛶⛵️🚤🛥🛳⛴🚢🚂🚝🚅🚆🚊🚉🚇🛺🚜"),
