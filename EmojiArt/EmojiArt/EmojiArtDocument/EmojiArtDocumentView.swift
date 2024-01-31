@@ -26,7 +26,7 @@ struct EmojiArtDocumentView: View {
         .scrollIndicators(.hidden)
     }
     
-    var documentBody: some View {
+    private var documentBody: some View {
         GeometryReader { geometry in
             ZStack {
                 Color.clear

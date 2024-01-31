@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct EmojiPalette: Identifiable, Codable {
+struct EmojiPalette: Identifiable, Codable, Hashable {
     var name: String
     var emojis: String
     private(set) var id = UUID()
@@ -23,4 +23,8 @@ struct EmojiPalette: Identifiable, Codable {
         EmojiPalette(name: "COVID", emojis: "💉🦠😷🤧🤒"),
         EmojiPalette(name: "Faces", emojis: "😀😃😄😁😆😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎🥸🤩🥳😏😞😔😟😕🙁☹️😣😖😫😩🥺😢😭😤😠😡🤯😳🥶😥😓🤗🤔🤭🤫🤥😬🙄😯😧🥱😴🤮😷🤧🤒🤠")
     ]
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
 }

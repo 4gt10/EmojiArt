@@ -11,12 +11,16 @@ struct EmojiPaletteView: View {
     @EnvironmentObject var viewModel: EmojiPaletteStore
     
     @State private var isPaletteEditorShown = false
+    @State private var isPaletteListShown = false
     
     var body: some View {
         HStack {
             chooser
                 .contextMenu {
                     gotoMenu
+                    AnimatedActionButton("List", systemImage: "list.bullet.rectangle.portrait") {
+                        isPaletteListShown = true
+                    }
                     AnimatedActionButton("Add", systemImage: "plus") {
                         viewModel.addEmptyPalette()
                         isPaletteEditorShown = true
@@ -36,6 +40,10 @@ struct EmojiPaletteView: View {
         .clipped()
         .sheet(isPresented: $isPaletteEditorShown) {
             EmojiPaletteEditorView(palette: $viewModel.palettes[viewModel.cursorIndex])
+                .font(nil)
+        }
+        .sheet(isPresented: $isPaletteListShown) {
+            EmojiPaletteListView(store: viewModel)
                 .font(nil)
         }
     }

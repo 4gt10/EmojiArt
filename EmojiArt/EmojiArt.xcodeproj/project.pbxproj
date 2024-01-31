@@ -21,6 +21,7 @@
 		BEA63AE02B51551600DB85FF /* EmojiPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA63ADF2B51551600DB85FF /* EmojiPaletteView.swift */; };
 		BEA63AE22B5155A300DB85FF /* AnimatedActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA63AE12B5155A300DB85FF /* AnimatedActionButton.swift */; };
 		BEBE09EA2B6272FD00FA448A /* EmojiPaletteEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBE09E92B6272FD00FA448A /* EmojiPaletteEditorView.swift */; };
+		BEF5193B2B690158005A0DA6 /* EmojiPaletteListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF5193A2B690158005A0DA6 /* EmojiPaletteListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		BEA63ADF2B51551600DB85FF /* EmojiPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPaletteView.swift; sourceTree = "<group>"; };
 		BEA63AE12B5155A300DB85FF /* AnimatedActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedActionButton.swift; sourceTree = "<group>"; };
 		BEBE09E92B6272FD00FA448A /* EmojiPaletteEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPaletteEditorView.swift; sourceTree = "<group>"; };
+		BEF5193A2B690158005A0DA6 /* EmojiPaletteListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPaletteListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,17 +110,10 @@
 				BEA63ADB2B51517400DB85FF /* EmojiPalette.swift */,
 				BEA63ADD2B5151F300DB85FF /* EmojiPaletteStore.swift */,
 				BEA63ADF2B51551600DB85FF /* EmojiPaletteView.swift */,
-				BEBE09E82B6272E200FA448A /* Edit */,
+				BEBE09E92B6272FD00FA448A /* EmojiPaletteEditorView.swift */,
+				BEF5193A2B690158005A0DA6 /* EmojiPaletteListView.swift */,
 			);
 			path = EmojiPalette;
-			sourceTree = "<group>";
-		};
-		BEBE09E82B6272E200FA448A /* Edit */ = {
-			isa = PBXGroup;
-			children = (
-				BEBE09E92B6272FD00FA448A /* EmojiPaletteEditorView.swift */,
-			);
-			path = Edit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +191,7 @@
 				BEA63ADE2B5151F300DB85FF /* EmojiPaletteStore.swift in Sources */,
 				BEA63AD22B4FF22900DB85FF /* EmojiArt.swift in Sources */,
 				BEA63AC62B4FF1C000DB85FF /* EmojiArtDocumentView.swift in Sources */,
+				BEF5193B2B690158005A0DA6 /* EmojiPaletteListView.swift in Sources */,
 				BEBE09EA2B6272FD00FA448A /* EmojiPaletteEditorView.swift in Sources */,
 				BEA63AC42B4FF1C000DB85FF /* EmojiArtApp.swift in Sources */,
 				BE4F3EA32B67C52B001E889E /* EmojiArtError.swift in Sources */,

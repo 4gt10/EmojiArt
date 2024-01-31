@@ -19,7 +19,21 @@ final class EmojiPaletteStore: ObservableObject {
             objectWillChange.send()
         }
     }
-    @Published private(set) var cursorIndex = 0
+    @Published private var _cursorIndex = 0
+    
+    var cursorIndex: Int {
+        get { boundsCheckedPaletteIndex(_cursorIndex) }
+        set { _cursorIndex = boundsCheckedPaletteIndex(newValue) }
+    }
+    
+    
+    private func boundsCheckedPaletteIndex(_ index: Int) -> Int {
+        var index = index % palettes.count
+        if index < 0 {
+            index += palettes.count
+        }
+        return index
+    }
     
     private let defaults = UserDefaults.standard
     private var userDefaultsKey: String {

@@ -13,17 +13,24 @@ struct EmojiPaletteEditorView: View {
         static let emojiFont = Font.system(size: emojiSize)
     }
     
+    enum FocusedTextField {
+        case name
+        case emojis
+    }
+    
     @Binding var palette: EmojiPalette
     
     @State private var emojisToAdd = ""
     
-    
+    @FocusState private var focusedTextField: FocusedTextField?
     
     var body: some View {
         Form {
             TextField("Palette Name", text: $palette.name)
+                .focused($focusedTextField, equals: .name)
             TextField("Add Emojis Here", text: $emojisToAdd)
                 .font(Constant.emojiFont)
+                .focused($focusedTextField, equals: .emojis)
                 .onChange(of: emojisToAdd) {
                     palette.emojis = (emojisToAdd + palette.emojis)
                         .filter { $0.isEmoji }
@@ -32,6 +39,9 @@ struct EmojiPaletteEditorView: View {
             if !palette.emojis.isEmpty {
                 emojiRemover
             }
+        }
+        .onAppear {
+            focusedTextField = palette.name.isEmpty ? .name : .emojis
         }
     }
     
